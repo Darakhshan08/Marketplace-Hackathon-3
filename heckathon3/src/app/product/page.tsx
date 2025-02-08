@@ -1,16 +1,27 @@
-import React from 'react'
-import { List, Heart, ShoppingCart, ZoomIn, Grid2x2 } from "lucide-react";
+import React from 'react';
+import { List, Heart, ShoppingCart, ZoomIn, Grid2x2 } from 'lucide-react';
 import Image from 'next/image';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import Link from 'next/link';
 
+// Define the Product interface
+interface Product {
+  _id: string;
+  name: string;
+  imageUrl: string;
+  price: number;
+  description?: string;
+  discountPercentage?: number;
+  stockLevel?: number;
+  category?: string;
+  originalPrice?: number; // Optional field for discounted products
+}
 
-
-
-  const page = async () => {
-    const product = await client.fetch(
-      `*[_type == "product"] {
+const Page = async () => {
+  // Fetch products from Sanity
+  const products = await client.fetch<Product[]>(
+    `*[_type == "product"] {
       _id,
       name,
       "imageUrl": image.asset->url,
@@ -19,34 +30,31 @@ import Link from 'next/link';
       discountPercentage,
       stockLevel,
       category
-      
     }`
-    
-      
-    );
+  );
 
-// function page() {
   return (
     <>
+      {/* Header Section */}
       <header className="bg-[#F6F5FF] py-4 sm:py-6 lg:py-8 w-full">
         <div className="max-w-7xl mx-auto px-4 py-12">
-          <h1 className="text-2xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#101750]">
-            Shop 
-          </h1>
+          <h1 className="text-2xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#101750]">Shop</h1>
           <nav className="text-base sm:text-sm font-medium">
-            <span className="text-base font-medium ">Home</span> • <span className="text-base font-medium ">Pages</span> •{" "}
-            <span className="text-[#FB2E86] text-base font-medium ">Shop</span>
+            <span className="text-base font-medium">Home</span> •{' '}
+            <span className="text-base font-medium">Pages</span> •{' '}
+            <span className="text-[#FB2E86] text-base font-medium">Shop</span>
           </nav>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-12 ">
-        {/* Product Section */}
-        <header className="my-24 ">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between pb-4 gap-4 md:gap-0">
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 py-12">
+        {/* Product Section Header */}
+        <header className="my-24">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between pb-4 gap-4 md:gap-0">
             <div>
               <h1 className="text-[#151875] text-2xl font-semibold mb-1">
-                Ecommerce Acceories & Fashion item
+                Ecommerce Accessories & Fashion Items
               </h1>
               <p className="text-[#8A8FB9] text-sm font-normal">
                 About 9,620 results (0.62 seconds)
@@ -58,14 +66,13 @@ import Link from 'next/link';
                 <span className="text-base text-[#3F509E] font-normal">Per Page:</span>
                 <input
                   type="number"
-                   className="border border-[#E7E6EF] w-full sm:w-16 px-2 py-2.5 text-sm"
-
+                  className="border border-[#E7E6EF] w-full sm:w-16 px-2 py-2.5 text-sm"
                 />
               </div>
 
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <span className="text-base text-[#3F509E] font-normal">Sort By:</span>
-              <select className="border border-[#E7E6EF] w-full sm:w-[112px] px-2 py-2.5 text-sm">
+                <select className="border border-[#E7E6EF] w-full sm:w-[112px] px-2 py-2.5 text-sm">
                   <option>Best Match</option>
                   <option>Price: Low to High</option>
                   <option>Price: High to Low</option>
@@ -76,16 +83,15 @@ import Link from 'next/link';
                 <span className="text-base text-[#3F509E] font-normal">View:</span>
                 <div className="flex rounded">
                   <button className="p-1.5 hover:bg-gray-100">
-                    <Grid2x2 size={18} className='text-[#3F509E]' />
+                    <Grid2x2 size={18} className="text-[#3F509E]" />
                   </button>
                   <button className="p-1.5 hover:bg-gray-100">
-                    <List size={18} className='text-[#3F509E]' />
+                    <List size={18} className="text-[#3F509E]" />
                   </button>
                   <div className="flex items-center gap-4">
                     <input
                       type="text"
-                      className="border border-[#E7E6EF]  min-w-[120px] px-6 py-2.5 text-sm  "
-
+                      className="border border-[#E7E6EF] min-w-[120px] px-6 py-2.5 text-sm"
                     />
                   </div>
                 </div>
@@ -94,9 +100,10 @@ import Link from 'next/link';
           </div>
         </header>
 
+        {/* Product Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {product.length > 0 ? (
-            product.map((product: any) => (
+          {products.length > 0 ? (
+            products.map((product) => (
               <div key={product._id} className="group">
                 <div className="relative mb-3 aspect-square bg-[#F6F7FB] rounded-lg overflow-hidden group-hover:bg-[#EBF4F3]">
                   <div className="flex justify-center items-center h-full">
@@ -109,7 +116,10 @@ import Link from 'next/link';
                     />
                   </div>
                   <div className="absolute left-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col gap-2">
-                    <Link  href={'/details/'+product  ._id} className="p-2 rounded-full hover:bg-[#FFFFFF]">
+                    <Link
+                      href={`/details/${product._id}`}
+                      className="p-2 rounded-full hover:bg-[#FFFFFF]"
+                    >
                       <ShoppingCart className="w-4 h-4 text-[#2F1AC4]" />
                     </Link>
                     <button className="p-2 rounded-full hover:bg-[#FFFFFF]">
@@ -148,11 +158,9 @@ import Link from 'next/link';
             </p>
           )}
         </div>
-
-    
-          {/* /// */}
-
       </main>
+
+      {/* Footer Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-8 py-8 sm:py-12 lg:py-16">
         <div className="overflow-x-auto">
           <div className="flex justify-center items-center bg-white py-4">
@@ -164,15 +172,12 @@ import Link from 'next/link';
                 width={100}
                 height={50}
               />
-
             </div>
           </div>
-
         </div>
-
       </section>
     </>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

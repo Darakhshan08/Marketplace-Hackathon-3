@@ -113,6 +113,7 @@ export default function CheckoutPage() {
       }
 
     } catch (error) {
+      console.error("Error placing order:", error); // Error log karega console me
       Swal.fire({
         icon: "error",
         title: "Oops...",
