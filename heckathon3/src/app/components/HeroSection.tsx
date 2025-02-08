@@ -3,45 +3,45 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 function HeroSection() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  // const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
-    {
-      lamp: "https://s3-alpha-sig.figma.com/img/b0ab/7b45/906d2aaf430d5bb6b86d462a9e91a8af?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ru5FvQWpcV868wGcCK~xH6e7UhX-06Q3XHFW9Bnqb3HO9a7iFJ9GJrrBuvPPHzRTM0-6mnkMblakg2OOPfcmzyHe0iPO0ffZe1xyS4B7nqdGZcnwOlSnVQ8lxqGQstUKlcOKtUoMJpDulFOSTbsrMxn39gV9Cq9soIFoZVTJW2rtgRB2hgD8uBrutAXL0Tdd4mOUUqnGyaYYtv5IsXiyPIKnuSsY~tJFQwYDMy4Gi~ApHpnxXqbDAOHx4xr8nOjnMVAilMm6~ObNX3Menc55vzwXc1PfguQEZvj-4C1GjedbdVqknYw0J0sseLl2A39w6S1SSWprrkBFh5UPUbsOhQ__", // Replace with actual path of the lamp image
-      sofa: "https://s3-alpha-sig.figma.com/img/c453/494a/61ecc67b127029400b09a70cf2e9e973?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=d4hNwCnj7HBFQpBDLosNs7hWLdoO4p1cZF5PtHtw7zLfG3qfvhE~Bd7vQcIlm0UFNTBAvHLEabt7tHk6VW5oKndRqErp7KT4p6bCN5irLPII5c87VeyJANJjZB9edjdURV9IrQWV1yByYV8LecdKv9qGOvM4eFykZU4GZKeCppP9hB4TojNXhK4gFBSAv0g3eiZ35jHYo~hFSw0hyyQzDiMXAYcbA1KiVEGUQP-d196Wge-9pSh~garEnsdibk1Yh9gBnF2r0X1oRMKuIPJgjjBpUGLBKJoqT2ln3P8NEPwii0SYInsSQKzE5kcNk4Uyd917-IjOMPrtdWFSHIqznQ__", // Replace with actual path of the sofa image
-      heading: "New Furniture Collection Trends in 2020",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.",
-      buttonText: "Shop Now",
-    },
-    {
-      lamp: "https://s3-alpha-sig.figma.com/img/b0ab/7b45/906d2aaf430d5bb6b86d462a9e91a8af?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ru5FvQWpcV868wGcCK~xH6e7UhX-06Q3XHFW9Bnqb3HO9a7iFJ9GJrrBuvPPHzRTM0-6mnkMblakg2OOPfcmzyHe0iPO0ffZe1xyS4B7nqdGZcnwOlSnVQ8lxqGQstUKlcOKtUoMJpDulFOSTbsrMxn39gV9Cq9soIFoZVTJW2rtgRB2hgD8uBrutAXL0Tdd4mOUUqnGyaYYtv5IsXiyPIKnuSsY~tJFQwYDMy4Gi~ApHpnxXqbDAOHx4xr8nOjnMVAilMm6~ObNX3Menc55vzwXc1PfguQEZvj-4C1GjedbdVqknYw0J0sseLl2A39w6S1SSWprrkBFh5UPUbsOhQ__", // Replace with actual path of the lamp image
-      sofa: "https://s3-alpha-sig.figma.com/img/c453/494a/61ecc67b127029400b09a70cf2e9e973?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=d4hNwCnj7HBFQpBDLosNs7hWLdoO4p1cZF5PtHtw7zLfG3qfvhE~Bd7vQcIlm0UFNTBAvHLEabt7tHk6VW5oKndRqErp7KT4p6bCN5irLPII5c87VeyJANJjZB9edjdURV9IrQWV1yByYV8LecdKv9qGOvM4eFykZU4GZKeCppP9hB4TojNXhK4gFBSAv0g3eiZ35jHYo~hFSw0hyyQzDiMXAYcbA1KiVEGUQP-d196Wge-9pSh~garEnsdibk1Yh9gBnF2r0X1oRMKuIPJgjjBpUGLBKJoqT2ln3P8NEPwii0SYInsSQKzE5kcNk4Uyd917-IjOMPrtdWFSHIqznQ__", // Replace with actual path of the sofa image
-      heading: "Explore Modern Furniture Designs",
-      description:
-        "Find your perfect furniture piece with our trending collection.",
-      buttonText: "Discover Now",
-    },
-    {
-      lamp: "https://s3-alpha-sig.figma.com/img/b0ab/7b45/906d2aaf430d5bb6b86d462a9e91a8af?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ru5FvQWpcV868wGcCK~xH6e7UhX-06Q3XHFW9Bnqb3HO9a7iFJ9GJrrBuvPPHzRTM0-6mnkMblakg2OOPfcmzyHe0iPO0ffZe1xyS4B7nqdGZcnwOlSnVQ8lxqGQstUKlcOKtUoMJpDulFOSTbsrMxn39gV9Cq9soIFoZVTJW2rtgRB2hgD8uBrutAXL0Tdd4mOUUqnGyaYYtv5IsXiyPIKnuSsY~tJFQwYDMy4Gi~ApHpnxXqbDAOHx4xr8nOjnMVAilMm6~ObNX3Menc55vzwXc1PfguQEZvj-4C1GjedbdVqknYw0J0sseLl2A39w6S1SSWprrkBFh5UPUbsOhQ__", // Replace with actual path of the lamp image
-      sofa: "https://s3-alpha-sig.figma.com/img/c453/494a/61ecc67b127029400b09a70cf2e9e973?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=d4hNwCnj7HBFQpBDLosNs7hWLdoO4p1cZF5PtHtw7zLfG3qfvhE~Bd7vQcIlm0UFNTBAvHLEabt7tHk6VW5oKndRqErp7KT4p6bCN5irLPII5c87VeyJANJjZB9edjdURV9IrQWV1yByYV8LecdKv9qGOvM4eFykZU4GZKeCppP9hB4TojNXhK4gFBSAv0g3eiZ35jHYo~hFSw0hyyQzDiMXAYcbA1KiVEGUQP-d196Wge-9pSh~garEnsdibk1Yh9gBnF2r0X1oRMKuIPJgjjBpUGLBKJoqT2ln3P8NEPwii0SYInsSQKzE5kcNk4Uyd917-IjOMPrtdWFSHIqznQ__", // Replace with actual path of the sofa image
-      heading: "Explore Modern Furniture Designs",
-      description:
-        "Find your perfect furniture piece with our trending collection.",
-      buttonText: "Discover Now",
-    },
-  ];
+  // const slides = [
+  //   {
+  //     lamp: "https://s3-alpha-sig.figma.com/img/b0ab/7b45/906d2aaf430d5bb6b86d462a9e91a8af?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ru5FvQWpcV868wGcCK~xH6e7UhX-06Q3XHFW9Bnqb3HO9a7iFJ9GJrrBuvPPHzRTM0-6mnkMblakg2OOPfcmzyHe0iPO0ffZe1xyS4B7nqdGZcnwOlSnVQ8lxqGQstUKlcOKtUoMJpDulFOSTbsrMxn39gV9Cq9soIFoZVTJW2rtgRB2hgD8uBrutAXL0Tdd4mOUUqnGyaYYtv5IsXiyPIKnuSsY~tJFQwYDMy4Gi~ApHpnxXqbDAOHx4xr8nOjnMVAilMm6~ObNX3Menc55vzwXc1PfguQEZvj-4C1GjedbdVqknYw0J0sseLl2A39w6S1SSWprrkBFh5UPUbsOhQ__", // Replace with actual path of the lamp image
+  //     sofa: "https://s3-alpha-sig.figma.com/img/c453/494a/61ecc67b127029400b09a70cf2e9e973?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=d4hNwCnj7HBFQpBDLosNs7hWLdoO4p1cZF5PtHtw7zLfG3qfvhE~Bd7vQcIlm0UFNTBAvHLEabt7tHk6VW5oKndRqErp7KT4p6bCN5irLPII5c87VeyJANJjZB9edjdURV9IrQWV1yByYV8LecdKv9qGOvM4eFykZU4GZKeCppP9hB4TojNXhK4gFBSAv0g3eiZ35jHYo~hFSw0hyyQzDiMXAYcbA1KiVEGUQP-d196Wge-9pSh~garEnsdibk1Yh9gBnF2r0X1oRMKuIPJgjjBpUGLBKJoqT2ln3P8NEPwii0SYInsSQKzE5kcNk4Uyd917-IjOMPrtdWFSHIqznQ__", // Replace with actual path of the sofa image
+  //     heading: "New Furniture Collection Trends in 2020",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.",
+  //     buttonText: "Shop Now",
+  //   },
+  //   {
+  //     lamp: "https://s3-alpha-sig.figma.com/img/b0ab/7b45/906d2aaf430d5bb6b86d462a9e91a8af?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ru5FvQWpcV868wGcCK~xH6e7UhX-06Q3XHFW9Bnqb3HO9a7iFJ9GJrrBuvPPHzRTM0-6mnkMblakg2OOPfcmzyHe0iPO0ffZe1xyS4B7nqdGZcnwOlSnVQ8lxqGQstUKlcOKtUoMJpDulFOSTbsrMxn39gV9Cq9soIFoZVTJW2rtgRB2hgD8uBrutAXL0Tdd4mOUUqnGyaYYtv5IsXiyPIKnuSsY~tJFQwYDMy4Gi~ApHpnxXqbDAOHx4xr8nOjnMVAilMm6~ObNX3Menc55vzwXc1PfguQEZvj-4C1GjedbdVqknYw0J0sseLl2A39w6S1SSWprrkBFh5UPUbsOhQ__", // Replace with actual path of the lamp image
+  //     sofa: "https://s3-alpha-sig.figma.com/img/c453/494a/61ecc67b127029400b09a70cf2e9e973?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=d4hNwCnj7HBFQpBDLosNs7hWLdoO4p1cZF5PtHtw7zLfG3qfvhE~Bd7vQcIlm0UFNTBAvHLEabt7tHk6VW5oKndRqErp7KT4p6bCN5irLPII5c87VeyJANJjZB9edjdURV9IrQWV1yByYV8LecdKv9qGOvM4eFykZU4GZKeCppP9hB4TojNXhK4gFBSAv0g3eiZ35jHYo~hFSw0hyyQzDiMXAYcbA1KiVEGUQP-d196Wge-9pSh~garEnsdibk1Yh9gBnF2r0X1oRMKuIPJgjjBpUGLBKJoqT2ln3P8NEPwii0SYInsSQKzE5kcNk4Uyd917-IjOMPrtdWFSHIqznQ__", // Replace with actual path of the sofa image
+  //     heading: "Explore Modern Furniture Designs",
+  //     description:
+  //       "Find your perfect furniture piece with our trending collection.",
+  //     buttonText: "Discover Now",
+  //   },
+  //   {
+  //     lamp: "https://s3-alpha-sig.figma.com/img/b0ab/7b45/906d2aaf430d5bb6b86d462a9e91a8af?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ru5FvQWpcV868wGcCK~xH6e7UhX-06Q3XHFW9Bnqb3HO9a7iFJ9GJrrBuvPPHzRTM0-6mnkMblakg2OOPfcmzyHe0iPO0ffZe1xyS4B7nqdGZcnwOlSnVQ8lxqGQstUKlcOKtUoMJpDulFOSTbsrMxn39gV9Cq9soIFoZVTJW2rtgRB2hgD8uBrutAXL0Tdd4mOUUqnGyaYYtv5IsXiyPIKnuSsY~tJFQwYDMy4Gi~ApHpnxXqbDAOHx4xr8nOjnMVAilMm6~ObNX3Menc55vzwXc1PfguQEZvj-4C1GjedbdVqknYw0J0sseLl2A39w6S1SSWprrkBFh5UPUbsOhQ__", // Replace with actual path of the lamp image
+  //     sofa: "https://s3-alpha-sig.figma.com/img/c453/494a/61ecc67b127029400b09a70cf2e9e973?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=d4hNwCnj7HBFQpBDLosNs7hWLdoO4p1cZF5PtHtw7zLfG3qfvhE~Bd7vQcIlm0UFNTBAvHLEabt7tHk6VW5oKndRqErp7KT4p6bCN5irLPII5c87VeyJANJjZB9edjdURV9IrQWV1yByYV8LecdKv9qGOvM4eFykZU4GZKeCppP9hB4TojNXhK4gFBSAv0g3eiZ35jHYo~hFSw0hyyQzDiMXAYcbA1KiVEGUQP-d196Wge-9pSh~garEnsdibk1Yh9gBnF2r0X1oRMKuIPJgjjBpUGLBKJoqT2ln3P8NEPwii0SYInsSQKzE5kcNk4Uyd917-IjOMPrtdWFSHIqznQ__", // Replace with actual path of the sofa image
+  //     heading: "Explore Modern Furniture Designs",
+  //     description:
+  //       "Find your perfect furniture piece with our trending collection.",
+  //     buttonText: "Discover Now",
+  //   },
+  // ];
 
-  const totalSlides = slides.length;
+  // const totalSlides = slides.length;
 
   // Auto slide functionality
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, 5000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  //   }, 5000);
 
-    return () => clearInterval(interval); // Cleanup interval
-  }, [totalSlides]);
+  //   return () => clearInterval(interval); // Cleanup interval
+  // }, [totalSlides]);
 
   return (
     <div className="bg-[#F2F0FF] min-h-[500px]">

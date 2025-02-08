@@ -31,11 +31,11 @@ import Link from 'next/link';
       <header className="bg-[#F6F5FF] py-4 sm:py-6 lg:py-8 w-full">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <h1 className="text-2xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#101750]">
-            Shop Grid Default
+            Shop 
           </h1>
           <nav className="text-base sm:text-sm font-medium">
             <span className="text-base font-medium ">Home</span> • <span className="text-base font-medium ">Pages</span> •{" "}
-            <span className="text-[#FB2E86] text-base font-medium ">Shop Grid Default</span>
+            <span className="text-[#FB2E86] text-base font-medium ">Shop</span>
           </nav>
         </div>
       </header>

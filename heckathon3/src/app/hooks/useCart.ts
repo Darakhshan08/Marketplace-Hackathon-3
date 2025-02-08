@@ -4,12 +4,17 @@
 import { useEffect, useState } from "react";
 
 export interface CartItem {
-  [x: string]: any;
+  // [x: string]: string | number; // Allow additional properties of type string or number
+  // [x: string]: any;
   id: string;
   name: string;
   imageUrl: string;
   price: number;
   quantity: number;
+  description?: string; // Optional field
+  discountPercentage?: number; // Optional field
+  stockLevel?: number; // Optional field
+  category?: string; // Optional field
 }
 
 export const useCart = () => {
