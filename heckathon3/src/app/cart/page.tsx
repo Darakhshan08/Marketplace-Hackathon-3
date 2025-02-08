@@ -156,7 +156,7 @@ function Page() {
 
                         </div>
 
-                        <h2 className="text-xl font-semibold text-center text-[#1D3178] mb-4">
+                        {/* <h2 className="text-xl font-semibold text-center text-[#1D3178] mb-4">
                             Calculate Shopping
                         </h2>
                         <div className="bg-[#F4F4FC] border border-gray-200 rounded-lg shadow-sm p-6">
@@ -182,7 +182,7 @@ function Page() {
                             <button className="w-full py-2.5 bg-[#FB2E86] text-white rounded-lg font-medium hover:bg-pink-600 transition-colors">
                                 Calculate Shipping
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
