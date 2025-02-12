@@ -1,3 +1,4 @@
+
 import type { Rule as RuleType } from '@sanity/types';
 
 export default {
